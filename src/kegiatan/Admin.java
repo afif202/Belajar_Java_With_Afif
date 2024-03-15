@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 class Admin {
+
+    static String adminUsername = "admin";
+    static String adminPassword = "admln";
+
     public static void loginAsAdmin(ArrayList<Student> students) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("===== Admin Menu =====");
@@ -27,7 +31,7 @@ class Admin {
                 System.out.println("Input tidak valid. Silakan coba lagi.");
         }
 
-        scanner.close(); // Menutup objek Scanner setelah selesai menggunakan
+        scanner.close();
     }
 
     public static void addStudent(ArrayList<Student> students) {

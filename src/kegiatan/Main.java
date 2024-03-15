@@ -8,6 +8,10 @@ public class Main {
     private static final ArrayList<Book> books = new ArrayList<>();
     private static final Scanner scanner = new Scanner(System.in);
 
+    private static final String usernameAdmin = "admin";
+    private static final String passwordAdmin = "admin";
+
+
     public static void main(String[] args) {
         books.add(new Book("003", "belajar bahasa c", "Jhon", "tech", 3));
         books.add(new Book("002", "belajar bahasa kotlin", "Alex", "Tech", 2));
@@ -26,7 +30,7 @@ public class Main {
                     loginAsStudent();
                     break;
                 case 2:
-                    loginAsAdmin();
+                    log_admin();
                     break;
                 case 3:
                     System.out.println("Terima kasih. Keluar dari program.");
@@ -35,6 +39,22 @@ public class Main {
                 default:
                     System.out.println("Input tidak valid. Silakan coba lagi.");
             }
+        }
+    }
+
+    static void log_admin() {
+
+        System.out.print("Masukan username admin(admin) : ");
+        Scanner scan = new Scanner(System.in);
+        String user = scan.nextLine();
+        System.out.print("Masukan pasword admin(admln) : ");
+        String pwd = scan.nextLine();
+
+        if (user.equals(Admin.adminUsername) && pwd.equals(Admin.adminPassword)) {
+            System.out.println();
+            Main.menuAdmin();
+        } else {
+            System.out.println("Invalid credentials for admin.\n");
         }
     }
 
@@ -48,7 +68,7 @@ public class Main {
             return;
         }
 
-        Student student = findStudentByNim(nim); //mencari objek student berdasarkan nim
+        Student student = findStudentByNim(nim);
 
         if (student == null) {
             System.out.println("Mahasiswa tidak ditemukan. Kembali ke menu utama...");
@@ -65,7 +85,7 @@ public class Main {
 
             switch (userInput) {
                 case 1:
-                    student.viewBorrowedBooks();//memanggil metode dari objek student
+                    student.viewBorrowedBooks();
                     break;
                 case 2:
                     student.borrowBook(books, scanner);
@@ -88,7 +108,8 @@ public class Main {
         return null;
     }
 
-    public static void loginAsAdmin() {
+    public static void menuAdmin() {
+
         System.out.println("===== Admin Menu =====");
         System.out.println("1. Tambah Mahasiswa");
         System.out.println("2. Tampilkan Mahasiswa Terdaftar");
