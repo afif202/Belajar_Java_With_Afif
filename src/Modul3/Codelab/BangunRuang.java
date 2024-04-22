@@ -8,7 +8,7 @@ public class BangunRuang {
     }
 
     public void inputNilai(String type) {
-        System.out.println("=Input nilai " + type);
+        System.out.println("\nInput nilai bangun ruang " + type);
     }
 
     public void luasPermukaan() {
