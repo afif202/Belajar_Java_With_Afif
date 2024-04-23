@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Admin extends User implements iMenu {
+
     public Admin(String name) {
         super(name);
     }

@@ -14,7 +14,7 @@ public class LibrarySystem implements iMenu {
     private final Scanner scanner;
     static Scanner inputuser = new Scanner(System.in);
 
-    static String adminusername = "admin", adminpassword = "admin123";
+    static String adminusername = "admin", adminpassword = "admin";
     private final Admin admin;
     private final User user;
 
@@ -42,7 +42,7 @@ public class LibrarySystem implements iMenu {
                 inputNim();
                 break;
             case 2:
-                loginadmin();
+                loginAdmin();
                 menuAdmin();
                 break;
             case 3:
@@ -85,7 +85,7 @@ public class LibrarySystem implements iMenu {
         return null;
     }
 
-    static void loginadmin() {
+    static void loginAdmin() {
         int adminloop;
         do {
             System.out.println("\n==== Login ====");
