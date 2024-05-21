@@ -10,7 +10,7 @@ public class Student extends User implements iMenu {
     public String nim;
     public String faculty;
     public String program;
-    public String name;
+//    public String name;
 
     public Student(String name, String nim, String faculty, String program) {
         super(name);

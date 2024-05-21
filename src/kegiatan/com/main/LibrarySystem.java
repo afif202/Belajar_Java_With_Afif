@@ -4,9 +4,11 @@ package kegiatan.com.main;
 import kegiatan.data.Admin;
 import kegiatan.data.Student;
 import kegiatan.data.User;
+import kegiatan.exception.costum.illegalAdminAcces;
 import kegiatan.util.iMenu;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class LibrarySystem implements iMenu {
@@ -42,8 +44,13 @@ public class LibrarySystem implements iMenu {
                 inputNim();
                 break;
             case 2:
-                loginAdmin();
-                menuAdmin();
+                try {
+                    loginAdmin();
+                    menuAdmin();
+                } catch (illegalAdminAcces e) {
+                    System.out.println(e.getMessage());
+                    menu();
+                }
                 break;
             case 3:
                 System.out.println("Terimakasih orang baik telah menggunakan program saya");
@@ -85,7 +92,7 @@ public class LibrarySystem implements iMenu {
         return null;
     }
 
-    static void loginAdmin() {
+    static void loginAdmin() throws illegalAdminAcces {
         int adminloop;
         do {
             System.out.println("\n==== Login ====");
@@ -99,8 +106,9 @@ public class LibrarySystem implements iMenu {
                 System.out.println("==== Login Successful ====\n");
                 adminloop = 1;
             } else {
-                System.out.println("==== Admin not found ====");
                 adminloop = 0;
+                throw new illegalAdminAcces("==== Invalid Credentials ====");
+
             }
         } while (adminloop == 0);
     }
@@ -115,28 +123,35 @@ public class LibrarySystem implements iMenu {
             System.out.println("4. Display Registered Students");
             System.out.println("5. Logout");
             System.out.print("Choose an option: ");
-            int choice = scanner.nextInt();
-            scanner.nextLine();
 
-            switch (choice) {
-                case 1:
-                    admin.inputBook();
-                    break;
-                case 2:
-                    admin.displayBooks();
-                    break;
-                case 3:
-                    admin.addStudent(userStudent);
-                    break;
-                case 4:
-                    displayStudent();
-                    break;
-                case 5:
-                    menu();
-                    break;
-                default:
-                    System.out.println("Invalid choice. Try again.");
+            try {
+                int choice = scanner.nextInt();
+                scanner.nextLine();
+
+                switch (choice) {
+                    case 1:
+                        admin.inputBook();
+                        break;
+                    case 2:
+                        admin.displayBooks();
+                        break;
+                    case 3:
+                        admin.addStudent(userStudent);
+                        break;
+                    case 4:
+                        displayStudent();
+                        break;
+                    case 5:
+                        menu();
+                        break;
+                    default:
+                        System.out.println("Invalid choice. Try again.");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid choice. Please Input Number");
+                scanner.nextLine();
             }
+
         }
     }
 
@@ -150,28 +165,35 @@ public class LibrarySystem implements iMenu {
             System.out.println("4. Return Book");
             System.out.println("5. Logout");
             System.out.print("Choose an option: ");
-            int choice = scanner.nextInt();
-            scanner.nextLine();
 
-            switch (choice) {
-                case 1:
-                    user.displayBooks();
-                    break;
-                case 2:
-                    currentStudent.borrowBook(user.bookList);
-                    break;
-                case 3:
-                    currentStudent.showBorrowedBook(user.bookList);
-                    break;
-                case 4:
-                    currentStudent.returnBook(user.bookList);
-                    break;
-                case 5:
-                    menu();
-                    break;
-                default:
-                    System.out.println("Invalid choice. Try again.");
+            try {
+                int choice = scanner.nextInt();
+                scanner.nextLine();
+
+                switch (choice) {
+                    case 1:
+                        user.displayBooks();
+                        break;
+                    case 2:
+                        currentStudent.borrowBook(user.bookList);
+                        break;
+                    case 3:
+                        currentStudent.showBorrowedBook(user.bookList);
+                        break;
+                    case 4:
+                        currentStudent.returnBook(user.bookList);
+                        break;
+                    case 5:
+                        menu();
+                        break;
+                    default:
+                        System.out.println("Invalid choice. Try again.");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid Choice. Please input number");
+                scanner.nextLine();
             }
+
         }
     }
 
